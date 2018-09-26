@@ -1,9 +1,10 @@
-import * as fs from 'fs';
+// import * as fs from 'fs';
 import { dirname, resolve } from 'path';
 
 function isFile ( file ) {
 	try {
-		const stats = fs.statSync( file );
+		// const stats = fs.statSync( file );
+        const stats = { isFile: () => true };
 		return stats.isFile();
 	} catch ( err ) {
 		return false;

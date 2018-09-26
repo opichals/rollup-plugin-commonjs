@@ -1,6 +1,6 @@
-import { statSync } from 'fs';
+// import { statSync } from 'fs';
 import { dirname, extname, resolve, sep } from 'path';
-import { sync as nodeResolveSync } from 'resolve';
+// import { sync as nodeResolveSync } from 'resolve';
 import { createFilter } from 'rollup-pluginutils';
 import { EXTERNAL, PREFIX, HELPERS_ID, HELPERS } from './helpers.js';
 import defaultResolver from './defaultResolver.js';
@@ -50,7 +50,8 @@ export default function commonjs ( options = {} ) {
 			let resolvedId;
 
 			try {
-				resolvedId = nodeResolveSync( id, { basedir: process.cwd() });
+                throw new Error('no resolve');
+				// resolvedId = nodeResolveSync( id, { basedir: process.cwd() });
 			} catch ( err ) {
 				resolvedId = resolve( id );
 			}
@@ -145,7 +146,7 @@ export default function commonjs ( options = {} ) {
 
 							for ( let i = 0; i < candidates.length; i += 1 ) {
 								try {
-									const stats = statSync( candidates[i] );
+									const stats = { isFile: () => true }; // statSync( candidates[i] );
 									if ( stats.isFile() ) return candidates[i];
 								} catch ( err ) { /* noop */ }
 							}
